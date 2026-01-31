@@ -15,7 +15,7 @@ import java.util.List;
  */
 @RestController
 @RequestMapping("/api/parcels")
-@CrossOrigin(origins = "http://localhost:3000") // Enable CORS for React frontend
+@CrossOrigin(origins = "*") // Enable CORS for React frontend
 public class ParcelController {
 
     private final ParcelService parcelService;
