@@ -15,7 +15,7 @@ import java.util.List;
  */
 @RestController
 @RequestMapping("/api/parcels")
-@CrossOrigin(origins = {"http://localhost:3000", "http://localhost:3001"}) // Enable CORS for React frontend on dev ports
+@CrossOrigin(origins = "https://couriertracking.vercel.app/") // Enable CORS for Vercel frontend
 public class ParcelController {
 
     private final ParcelService parcelService;
