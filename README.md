@@ -262,7 +262,9 @@ docker run -p 8080:8080 courier-backend
 * SSL automatically enabled
 
 📸 **Screenshot:**
+Vercel Deployment
 ![Vercel deployment](Devops/vercel%20frontend%20deployment.png)
+Custom Domain:
 ![Custom domain](Devops/custom%20domain%20name.png)
 
 ---
