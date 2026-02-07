@@ -1,27 +1,41 @@
-# PARCEL MANAGEMENT SYSTEM
-## Spring Boot Backend (Courier/Parcel Tracking)
+
+# 📦 PARCEL MANAGEMENT SYSTEM
+
+## Spring Boot Backend – Courier / Parcel Tracking
 
 ---
 
 ## 📋 PROJECT OVERVIEW
 
-Backend service for managing courier/parcel receipts with a REST API and H2 in-memory database.
+This project is a **Courier / Parcel Management Backend System** developed using **Spring Boot**.
+It provides RESTful APIs to manage parcel details such as sender, receiver, status, and delivery tracking.
+The backend is integrated with a React frontend and follows **DevOps practices** including CI/CD, Docker, Sonar analysis, and cloud deployment.
 
 ---
 
 ## 🛠️ TECHNOLOGY STACK
 
-**Backend:**
-- Java 17
-- Spring Boot 4.0.2
-- Spring Web MVC
-- Spring Data JPA
-- H2 Database (in-memory)
-- Maven
+### Backend
 
-**Frontend (optional):**
-- React (not included in this repository)
-- CORS is enabled for http://localhost:3000
+* Java 17
+* Spring Boot 4.0.2
+* Spring Web MVC
+* Spring Data JPA
+* H2 In-Memory Database
+* Maven
+
+### DevOps & Tools
+
+* GitHub Actions (CI/CD)
+* SonarCloud (Code Quality)
+* Docker
+* GitHub Organization
+* GitHub Student Developer Pack
+
+### Frontend (Integrated)
+
+* React
+* Deployed using Vercel
 
 ---
 
@@ -42,49 +56,72 @@ courier_tracking/
 │   │   │   ├── courier_tracking/
 │   │   │   │   └── CourierTrackingApplication.java
 │   │   │   └── parcelmanagement/
-│   │   │       ├── controller/ParcelController.java
-│   │   │       ├── model/Parcel.java
-│   │   │       ├── repository/ParcelRepository.java
+│   │   │       ├── controller/
+│   │   │       │   └── ParcelController.java
+│   │   │       ├── model/
+│   │   │       │   └── Parcel.java
+│   │   │       ├── repository/
+│   │   │       │   └── ParcelRepository.java
 │   │   │       └── service/
 │   │   │           ├── ParcelService.java
 │   │   │           └── impl/ParcelServiceImpl.java
 │   │   └── resources/
 │   │       └── application.properties
-│   └── test/java/com/example/courier_tracking/CourierTrackingApplicationTests.java
-└── target/ (build output)
+│   └── test/
+│       └── java/com/example/courier_tracking/
+│           └── CourierTrackingApplicationTests.java
+├── Devops/
+│   ├── Backend Build.png
+│   ├── backend execution.png
+│   ├── Docker image Build.png
+│   ├── sonarcube backend analysis.png
+│   ├── vercel frontend deployment.png
+│   └── custom domain name.png
+└── presentation/
+  ├── Parcel_Management_Presentation.pptx
+  └── Parcel_Management_Presentation.pdf
 ```
 
 ---
 
-## 🚀 INSTALLATION AND SETUP
+## 🚀 INSTALLATION & SETUP
 
 ### Prerequisites
-- Java 17
-- Maven 3.9+ (or use the Maven Wrapper)
 
-### Run locally
-1. Navigate to the backend folder:
-   ```
-   cd d:\courier_tracking\courier_tracking
-   ```
-2. Start the application:
-   ```
-   mvn spring-boot:run
-   ```
-   Or use the wrapper:
-   ```
-   .\mvnw.cmd spring-boot:run
-   ```
+* Java 17
+* Maven 3.9+ (or Maven Wrapper)
+* Docker (optional)
 
-### Base URLs
-- API: http://localhost:8080
-- H2 Console: http://localhost:8080/h2-console
+### Run Locally
+
+```bash
+cd d:\courier_tracking\courier_tracking
+mvn spring-boot:run
+```
+
+or
+
+```bash
+.\mvnw.cmd spring-boot:run
+```
+
+---
+
+## 🌐 APPLICATION URLS
+
+### Local Development
+
+* Backend API: `http://localhost:8080`
+* H2 Console: `http://localhost:8080/h2-console`
+
+### Production Deployment
+
+* Backend API (Render): [https://courier-backend-2-0.onrender.com](https://courier-backend-2-0.onrender.com)
+* Frontend (Vercel): [https://couriertracking.vercel.app/](https://couriertracking.vercel.app/)
 
 ---
 
 ## ⚙️ H2 DATABASE CONFIGURATION
-
-Configured in `src/main/resources/application.properties`:
 
 ```
 spring.datasource.url=jdbc:h2:mem:parceldb
@@ -94,242 +131,193 @@ spring.h2.console.enabled=true
 spring.h2.console.path=/h2-console
 ```
 
-**H2 Console Login:**
-- JDBC URL: `jdbc:h2:mem:parceldb`
-- Username: `sa`
-- Password: *(empty)*
+**H2 Login**
 
-To change the server port, update:
-```
-server.port=8080
-```
+* JDBC URL: `jdbc:h2:mem:parceldb`
+* Username: `sa`
+* Password: (empty)
 
 ---
 
-## 📡 API ENDPOINT DOCUMENTATION
+## 📡 API ENDPOINTS
 
-**Base path:** `/api/parcels`
+**Base Path:** `/api/parcels`
 
-| Method | Endpoint              | Description           |
-|--------|----------------------|----------------------|
-| POST   | /api/parcels         | Create new parcel    |
-| GET    | /api/parcels         | Get all parcels      |
-| GET    | /api/parcels/{id}    | Get parcel by ID     |
-| PUT    | /api/parcels/{id}    | Update parcel        |
-| DELETE | /api/parcels/{id}    | Delete parcel        |
+| Method | Endpoint          | Description        |
+| ------ | ----------------- | ------------------ |
+| POST   | /api/parcels      | Create new parcel  |
+| GET    | /api/parcels      | Fetch all parcels  |
+| GET    | /api/parcels/{id} | Fetch parcel by ID |
+| PUT    | /api/parcels/{id} | Update parcel      |
+| DELETE | /api/parcels/{id} | Delete parcel      |
 
-**Parcel JSON model:**
-```
+### Sample JSON
+
+```json
 {
   "senderName": "John Doe",
   "receiverName": "Jane Smith",
-  "parcelDescription": "Books",
+  "parcelDescription": "Electronics",
   "receivedDate": "2026-01-31",
   "status": "RECEIVED",
-  "contactNumber": "1234567890"
+  "contactNumber": "9876543210"
 }
 ```
 
 ---
 
-## 🐳 DOCKER INSTRUCTIONS
+## 🧪 BUILD & TESTING
 
-1. Build the JAR:
-   ```
-   mvn -DskipTests package
-   ```
-2. Build the image:
-   ```
-   docker build -t courier-tracking:latest .
-   ```
-3. Run the container:
-   ```
-   docker run -p 8080:8080 courier-tracking:latest
-   ```
+### Local Build
 
----
-
-## 🧪 TESTING
-
-Run tests with:
-```
-mvn test
+```bash
+mvn clean verify
 ```
 
-CI uses:
+📸 **Screenshot:**
+![Build success](Devops/Backend%20Build.png)
+
+---
+
+## 🔁 CI/CD PIPELINE (GitHub Actions)
+
+* CI workflow located at `.github/workflows/build.yml`
+* Triggers on:
+
+  * Push to `main`
+  * Pull Requests
+
+Pipeline stages:
+
+* Maven build
+* Unit testing
+* Sonar analysis
+
+📸 **Screenshot:**
+![CI/CD pipeline run](Devops/backend%20execution.png)
+
+---
+
+## 🔍 SONAR ANALYSIS (SONARCLOUD)
+
+* Organization: `23suca33-bca26`
+* Project Key: `23suca33-bca26_courier_backend`
+* Quality Gate enforced
+
+Command used:
+
+```bash
+mvn verify sonar:sonar
 ```
-mvn -B verify
+
+📸 **Screenshot:**
+![Sonar analysis](Devops/sonarcube%20backend%20analysis.png)
+
+---
+
+## 🔀 PULL REQUEST WORKFLOW
+
+* Feature branches created
+* Pull Request raised to `main`
+* CI + Sonar executed before merge
+
+📸 **Screenshot:**
+![Backend pull request](Devops/backend%20pull%20request.png)
+
+---
+
+## 🐳 DOCKER IMAGE BUILD
+
+### Build Image
+
+```bash
+docker build -t courier-backend .
 ```
 
----
+### Run Container
 
-## 💡 DEVELOPMENT TIPS (HOT RELOAD)
-
-- `spring-boot-devtools` is included for automatic restarts on classpath changes.
-- Use your IDE's automatic build/reload for the fastest feedback cycle.
-- H2 is in-memory; data resets on every restart.
-
----
-
-## ✅ CODE QUALITY AND SONAR (SONARCLOUD/SONARQUBE)
-
-GitHub Actions workflow: `.github/workflows/build.yml`
-
-Sonar configuration:
-- Organization: `23suca33-bca26`
-- Project key: `23suca33-bca26_courier_backend`
-
-The workflow runs:
-```
-mvn -B verify org.sonarsource.scanner.maven:sonar-maven-plugin:sonar
+```bash
+docker run -p 8080:8080 courier-backend
 ```
 
-Required secret:
-- `SONAR_TOKEN` (set in GitHub repository secrets)
+📸 **Screenshot:**
+![Docker image build](Devops/Docker%20image%20Build.png)
 
 ---
 
-## 🔀 PULL REQUESTS
+## 🌍 DEPLOYMENT
 
-- Open a PR against `main`.
-- The GitHub Actions workflow runs on PR open/synchronize/reopen.
-- Ensure the build and Sonar analysis succeed before merging.
+### Backend Deployment (Render)
 
----
+* Backend deployed on Render
+* Live URL: [https://courier-backend-2-0.onrender.com](https://courier-backend-2-0.onrender.com)
+* Automatically deploys from GitHub repository
+* CORS configured for frontend communication
 
-## ⚡ DEPLOYMENT CHALLENGES & SOLUTIONS
+### Frontend Deployment (Vercel)
 
-### 1️⃣ Challenge: node_modules committed to GitHub
+* Frontend deployed using Vercel
+* Live URL: [https://couriertracking.vercel.app/](https://couriertracking.vercel.app/)
+* Backend integrated via REST APIs
+* SSL automatically enabled
 
-**Problem:**
-- The node_modules folder was pushed to the repository, causing:
-  - Huge repo size
-  - Permission errors during CI/CD
-  - Build failures on Vercel (exit code 126)
-
-**Solution:**
-- Removed node_modules from Git tracking:
-  ```
-  git rm -r --cached node_modules
-  ```
-- Added node_modules to .gitignore
-- Redeployed so Vercel installs dependencies automatically
+📸 **Screenshot:**
+![Vercel deployment](Devops/vercel%20frontend%20deployment.png)
+![Custom domain](Devops/custom%20domain%20name.png)
 
 ---
 
-### 2️⃣ Challenge: Vercel Build Failed (npm run build exited with 126)
+## 🎥 PROJECT DEMO
 
-**Problem:**
-- Vercel could not execute react-scripts due to incorrect permissions from committed dependencies.
+* Live demonstration includes:
 
-**Solution:**
-- Cleaned repository
-- Allowed CI environment to install fresh dependencies
-- Ensured react-scripts exists in package.json
+  * API testing
+  * CI/CD pipeline
+  * Sonar dashboard
+  * Docker container
+  * Frontend integration
 
----
-
-### 3️⃣ Challenge: Backend container not responding (ERR_EMPTY_RESPONSE)
-
-**Problem:**
-- Docker container was running but not exposing the service correctly.
-
-**Solution:**
-- Verified backend was listening on 0.0.0.0
-- Ensured correct port mapping:
-  ```
-  docker run -p 8080:8080 backend
-  ```
-- Confirmed service availability via browser and logs
+📸 Demo recording shown during evaluation.
 
 ---
 
-### 4️⃣ Challenge: GitHub Organization Requirement
+## 📑 PRESENTATION (COMPLETED ✅)
 
-**Problem:**
-- Guide required project repositories to be under a GitHub organization instead of a personal account.
+Presentation prepared and submitted:
 
-**Solution:**
-- Created GitHub Organization
-- Transferred frontend and backend repositories
-- Updated Vercel and CI connections to the organization repos
+* `presentation/Parcel_Management_Presentation.pptx`
+* `presentation/Parcel_Management_Presentation.pdf`
 
----
+Includes:
 
-### 5️⃣ Challenge: CI/CD Repo Links Outdated
-
-**Problem:**
-- After transferring repositories, deployment platforms still pointed to old repo URLs.
-
-**Solution:**
-- Reconnected Vercel to the organization repo
-- Updated Render / CI repo links
-- Triggered fresh deployments
+* Architecture
+* Tools used
+* DevOps workflow
+* Challenges faced
+* Conclusion
 
 ---
 
-### 6️⃣ Challenge: Environment Variables Missing in Production
+## 🎓 GITHUB STUDENT DEVELOPER PACK
 
-**Problem:**
-- Application worked locally but failed in production due to missing .env values.
+Used for:
 
-**Solution:**
-- Added environment variables in Vercel dashboard
-- Ensured .env is ignored in Git
-- Used process.env in code
+* SonarCloud access
+* CI/CD tooling
+* Cloud integrations
 
----
-
-### 7️⃣ Challenge: Port Conflicts During Docker Deployment
-
-**Problem:**
-- Multiple services attempted to use the same port.
-
-**Solution:**
-- Assigned unique ports
-- Used Docker Compose for service orchestration
+📸 **Screenshot:**
+![Student pack](Devops/student%20pack.png)
 
 ---
 
-### 8️⃣ Challenge: Large Build Time & Dependency Mismatch
+## ⚡ CHALLENGES FACED & SOLUTIONS
 
-**Problem:**
-- Inconsistent builds due to different Node versions.
+* CI failures due to dependency mismatch
+* Docker port conflicts
+* Repository transfer to organization
+* Environment variable issues
+* Deployment permission errors
 
-**Solution:**
-- Added Node version specification:
-  ```json
-  "engines": {
-    "node": "18.x"
-  }
-  ```
-- Ensured local and CI environments matched
+All issues were resolved using best DevOps practices and are documented in this project.
 
----
-
-## � VERCEL DEPLOYMENT
-
-### Frontend Deployment (with Vercel)
-
-1. Push frontend code to GitHub organization repo
-2. Connect Vercel to the repository:
-   - Go to https://vercel.com/dashboard
-   - Import project from GitHub
-   - Select organization repo
-3. Configure environment variables in Vercel dashboard
-4. Deploy automatically on every push to `main`
-
-### Deployment with Custom Domain
-
-1. In Vercel dashboard, go to Settings → Domains
-2. Add your custom domain
-3. Follow DNS configuration instructions
-4. Vercel automatically provisions SSL certificate
-
----
-
-## �📞 PORTS USED
-
-- Backend/API: **8080**
-- H2 Console: **8080/h2-console**
-- Frontend (optional): **3000**
