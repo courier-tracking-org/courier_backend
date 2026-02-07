@@ -285,8 +285,8 @@ docker run -p 8080:8080 courier-backend
 
 Presentation prepared and submitted:
 
-* `presentation/Parcel_Management_Presentation.pptx`
-* `presentation/Parcel_Management_Presentation.pdf`
+* [presentation/Parcel_Management_Presentation.pdf](presentation/Parcel_Management_Presentation.pdf)
+* [Devops/courier tracking project presentation.pdf](Devops/courier%20tracking%20project%20presentation.pdf)
 
 Includes:
 
